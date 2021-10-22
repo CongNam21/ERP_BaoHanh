@@ -9,11 +9,11 @@
     'version': '1.0',
     'depends': [
         'crm',
-        'base',
+        'base'
     ],
     'data': [
        'views/KhachhangBH.xml',
-       'views/menu.xml',
+       'views/menu.xml'
     ],
     # 'qweb': ['static/src/xml/*.xml'],
     'installable': True,
