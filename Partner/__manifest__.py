@@ -9,7 +9,7 @@
     'version': '1.0',
     'depends': [
         'crm',
-        'base'
+        'base',
     ],
     'data': [
        'views/KhachhangBH.xml',
