@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="ship_act" model="ir.actions.act_window">
+            <field name="name">Giao Hàng</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ship.ship</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Tạo đơn hàng đầu tiên cua bạn
+              </p>
+            </field>
+        </record>
+        <record id="ship_tree" model="ir.ui.view">
+            <field name="name">Giao Hàng</field>
+            <field name="model">ship.ship</field>
+            <field name="arch" type="xml">
+                <tree string="Giao Hàng ">
+                    <field name="name"/>
+                    <field name="type"/>
+                    <field name="amount"/>
+                    <field name="person"/>
+                    <field name="address"/>
+                    <field name="phone"/>
+                    <field name="product"/>
+                </tree>
+            </field>
+        </record>
+         <menuitem id="ship_menu"
+              name="Ship"
+              sequence="10"/>
+    <menuitem id="ship_menu_item"
+              name="delivery"
+              parent="ship_menu"
+              sequence="10"/>
+    <menuitem id="delivery_menu"
+              name="delivery"
+              parent="ship_menu_item"
+              action="ship_act"
+              sequence="10"/>
+
+    </data>
+</odoo>
