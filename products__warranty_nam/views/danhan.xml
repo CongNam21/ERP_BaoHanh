@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+         <record id="hang_nhan_action" model="ir.actions.act_window">
+            <field name="name">Đã nhận hàng</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+             <field name="context">{}</field>
+              <field name="view_mode">tree,kanban,form</field>
+            <field name="domain">[('receive','=','dn')]</field>
+             <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Tạo sản phẩm đã nhận !
+                </p>
+</field>
+        </record>
+        <menuitem id="da_nhan"
+                   name="Đã nhận hàng"
+                   parent="menu_sale"
+                   action = "hang_nhan_action"
+                   sequence="4"/>
+
+    </data>
+</odoo>
