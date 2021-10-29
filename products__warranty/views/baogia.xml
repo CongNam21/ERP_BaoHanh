@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="sale_oder_form_view" model="ir.ui.view">
+            <field name="name">sale.oder.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                          <field name="partner_id" position="after">
+                           <field name= "date" on_change="onchange_end_date(date, datereturn)"/>
+                          </field>
+
+                          <field name="date" position="after">
+                           <field name= "datereturn" on_change="onchange_end_date(date, datereturn)"/>
+                           </field>
+
+                          <field name="datereturn" position="after">
+                         <field name= "name_employee"/>
+                                </field>
+
+                     <field name="name_employee" position="after">
+                         <field name="sp"/>
+                            </field>
+                            <field name="sp" position="after">
+                                <field name="receive"/>
+                            </field>
+                             <field name="receive" position="after">
+                                <field name="lydo"/>
+                            </field>
+                 <field name="lydo" position="after">
+                                <field name="bp"/>
+                            </field>
+                <field name="validity_date" position="after">
+                               <field name="image" string="Images" widget="image"/>
+                            </field>
+                <xpath expr="//field[@name='payment_term_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='date_order']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//label[@for='date_order']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='validity_date']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//page[@name='other_information']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//page[@name='other_information']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+
+            </field>
+        </record>
+
+        <record id="sale_tree_view" model="ir.ui.view">
+            <field name="name">sale.tree.view</field>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <tree string="Sale" default_order="create_date desc">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="date"/>
+                    <field name="datereturn"/>
+                    <field name="receive"/>
+                </tree>
+            </field>
+        </record>
+
+         <record id ="module_search_view" model = "ir.ui.view">
+            <field name="name">module_search_view</field>
+            <field name="model">sale.order</field>
+            <field eval="10" name="priority"/>
+            <field name="arch" type="xml">
+                <search string="Module Search">
+                    <field name="name" />
+                    <field name="partner_id"/>
+                    <field name ="date"/>
+                    <field name ="datereturn"/>
+                    <field name ="receive"/>
+                    <group expand='0' string='Filters'>
+                        <filter name="ĐA_filter" string="Đã nhận hàng" domain="[('receive', '=',  'dn')]"/>
+                        <filter name="CHO_filter" string="Chờ nhận hàng" domain="[('receive', '=',  'cn')]"/>
+
+                    </group>
+                    <group expand='0' string='Group by...'>
+                        <filter string='Trạng thái' name="status_group" context="{'group_by': 'receive'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+          <record id="action_sale" model="ir.actions.act_window">
+            <field name="name">Báo giá sửa chữa</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('sale_tree_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('sale_oder_form_view')})]"/>
+        </record>
+
+
+         <menuitem id="phieubaohanh_root"
+                  name="Product Warranty"
+                  sequence="1"/>
+
+        <menuitem id="menu_sale"
+            name="Bảo hành và Sửa chữa"
+            parent="phieubaohanh_root"
+            action="action_sale"
+            sequence="1"/>
+
+    </data>
+</odoo>
