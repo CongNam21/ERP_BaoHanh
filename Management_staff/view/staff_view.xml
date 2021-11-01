@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="management_staff_form_view" model="ir.ui.view">
+            <field name="name">hr.employee.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+
+            <field name="arch" type="xml">
+               <field name="identification_id" position="attributes">
+                   <attribute name="invisible">1</attribute>
+                </field>
+                <field name="private_email" position="attributes">
+                   <attribute name="invisible">1</attribute>
+                </field>
+                <field name="mobile_phone" position="after">
+                    <field name="sale_test"/>
+                </field>
+                <field name="study_school" position="after">
+                    <field name="language"/>
+                </field>
+                <field name="language" position="after">
+                    <field name="english"/>
+                </field>
+                <field name="country_id" position="after">
+                    <field name="iden"/>
+                </field>
+                <field name="phone" position="after">
+                    <field name="email"/>
+                </field>
+                <field name="english" position="after">
+                    <field name="certifi"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>
