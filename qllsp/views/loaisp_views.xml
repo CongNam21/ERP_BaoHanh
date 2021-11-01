@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="loaisp_form_view" model="ir.ui.view">
+            <field name="name">loaisp.form.view</field>
+            <field name="model">loaisp</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="loaisp">
+                            <label for="name" string="Tên loại" class="oe_edit_only"/>
+                            <h1><field name="name" placeholder="Lap top gaming"/></h1>
+                            <label for="owner_id"/>
+                            <h3><field name="owner_id"/></h3>
+                        </div>
+                        <group name="images">
+                            <group>
+                                <field name="brands_ids"/>
+                                <field name="soluong"/>
+                            </group>
+                            <group>
+                                <field name="thoigianbh"/>
+                                <field name="brands_ids"/>
+                            </group>                            
+                        </group>
+                        <notebook>
+                            <page name="general_information" string="General Information">
+								<group>
+									<group>
+										<label for="description" colspan="2"/>
+										<field name="description" colspan="2" nolabel="1"/>
+									</group>
+								</group>
+							</page>
+							<page name="additional_information" string="Additional Information">
+								<group>
+									<group string="Images">
+										<field name="sp_image" string="Image" widget="image"/>
+									</group>
+									<group string="Products">
+										<field name="product_ids" widget="many2many_tags"/>
+									</group>
+								</group>
+							</page>							
+						</notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="loaisp_tree_view" model="ir.ui.view">
+            <field name="name">loaisp.tree.view</field>
+            <field name="model">loaisp</field>
+            <field name="arch" type="xml">
+                <tree string="Type" default_order="create_date desc">
+                    <field name="name"/>
+                    <field name="soluong"/>
+                    <field name="thoigianbh"/>
+                    <field name="owner_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_loaisp" model="ir.actions.act_window">
+            <field name="name">Loai san pham</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">loaisp</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('loaisp_tree_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('loaisp_form_view')})]"/>
+        </record>
+
+        <menuitem id="menu_loaisp"
+            name="Loai san pham"
+            action="action_loaisp"
+            sequence="2"
+            />
+    </data>
+</odoo>
