@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="product_pet_form_view" model="ir.ui.view">
+            <field name="name">product.pet.form.view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//label[@for='list_price']" position="attributes">
+                    <attribute name="string">Giá bảo hành</attribute>
+                </xpath>
+                <xpath expr="//label[@for='name']" position="attributes">
+                    <attribute name="string">Tên sản phẩm</attribute>
+                </xpath>
+                <xpath expr="//field[@name='type']" position="attributes">
+                    <attribute name="string">Loại</attribute>
+                </xpath>
+                <xpath expr="//field[@name='categ_id']" position="attributes">
+                    <attribute name="string">Loại sản phẩm</attribute>
+                </xpath>
+                <field name="name" position="replace">
+                    <field name="name" placeholder="Iphone"/>
+                </field>
+                <field name="barcode" position="replace">
+                    <field name="bh"/>
+                </field>
+                <field name="bh" position="after">
+                    <field name="seri"/>
+                </field>
+                <field name="seri" position="after">
+                    <field name="nsx"/>
+                </field>
+
+                <xpath expr="//field[@name='sale_ok']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='purchase_ok']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//label[@for='sale_ok']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//label[@for='purchase_ok']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//page[@name='sales']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//page[@name='purchase']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//page[@name='inventory']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='default_code']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <record id="product_tree_view" model="ir.ui.view">
+            <field name="name">product.tree.view</field>
+            <field name="model">product.template</field>
+            <field name="arch" type="xml">
+                <tree string="Product" default_order="create_date desc">
+                    <field name="name"/>
+                    <field name="type"/>
+                    <field name="categ_id"/>
+                    <field name="list_price"/>
+                    <field name="bh"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_product" model="ir.actions.act_window">
+            <field name="name">Sản phẩm</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.template</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('product_tree_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('product_pet_form_view')})]"/>
+        </record>
+
+
+        <menuitem id="phieubaohanh_root"
+                  name="Quản lý sửa chữa"
+                  sequence="1"/>
+        <menuitem id="menu_qlysp"
+                  parent="phieubaohanh_root"
+                  name="Sản phẩm"
+                  sequence="10"/>
+
+        <menuitem id="sp_root"
+                  name="Thông tin sản phẩm"
+                  parent="menu_qlysp"
+                  action="action_product"
+                  sequence="10"/>
+        />
+    </data>
+</odoo>
