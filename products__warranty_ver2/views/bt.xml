@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="bienthe_sp_action" model="ir.actions.act_window">
+            <field name="name">Biến thể sản phẩm</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.attribute</field>
+
+
+        </record>
+
+           <menuitem id="phieubaohanh_root"
+                    name="Quản lý sửa chữa"
+                    sequence="1"/>
+          <menuitem id="menu_qlysp"
+                  parent="phieubaohanh_root"
+                  name="Sản phẩm"
+                  sequence="10"/>
+
+        <menuitem id="bienthe_sp_root"
+                    name="Biển thể sản phẩm"
+                    parent="menu_qlysp"
+                    action = "bienthe_sp_action"
+                     sequence="10" />
+    </data>
+</odoo>
