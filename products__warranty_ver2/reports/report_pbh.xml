@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report
+    id="report_pbh_card"
+    model="pbh.sp"
+    string="Phiếu"
+    report_type="qweb-pdf"
+    name="products__warranty.report_pbh"
+    file="products__warranty.report_pbh"
+/>
+
+</odoo>
