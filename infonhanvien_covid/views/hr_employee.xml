@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_employee_form_vaccine_details" model="ir.ui.view">
+        <field name="name">hr.employee.vaccination.details</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <field name="vaccination_status" invisible="1"/>
+
+                <button id="hr_presence_button" class="oe_stat_button" style="width: 153px;"
+                        groups="base.group_user">
+                    <div role="img" class="fa fa-heartbeat text-success o_button_icon"
+                         attrs="{'invisible': [('vaccination_status', '!=', 'full')]}" aria-label="Đã tiêm vacine"
+                         title="Đã tiêm đủ vacine"/>
+                    <div role="img" class="fa fa fa-heartbeat text-warning o_button_icon"
+                         attrs="{'invisible': [('vaccination_status', '!=', 'partial')]}"
+                         aria-label="Đã tiêm 1 mũi"
+                         title="Đã tiem 1 mũi"/>
+                    <div role="img" class="fa fa fa-heartbeat text-danger o_button_icon"
+                         attrs="{'invisible': [('vaccination_status', '!=', 'no')]}" aria-label="Chưa tiêm"
+                         title="Chưa tiêm"/>
+
+                    <div class="o_stat_info">
+                        <span class="o_stat_value" attrs="{'invisible': [('vaccination_status', '!=', 'full')]}">
+                            <b>Đã tiêm đủ</b>
+                        </span>
+                        <span class="o_stat_value" attrs="{'invisible': [('vaccination_status', '!=', 'partial')]}">
+                            <b>Đã tiêm</b>
+                        </span>
+                        <span class="o_stat_value" attrs="{'invisible': [('vaccination_status', '!=', 'no')]}">
+                            <b>Chưa tiêm</b>
+                        </span>
+                        <span class="o_stat_value">
+                            Số mũi :
+                            <field name="vaccine_dose_count"/>
+                        </span>
+
+                    </div>
+                </button>
+
+            </xpath>
+
+            <xpath expr="//page[@name='hr_settings']" position="after">
+                <page name="vaccination_details" string="Vaccination Details" groups="hr.group_hr_manager">
+                    <field name="employee_vaccination_ids" mode="tree,kanban">
+                        <tree string="Vaccination Details">
+                            <control>
+                                <create name="add_product_control" string="Thêm thông tin Vacine"/>
+                            </control>
+                            <field name="sequence" widget="handle"/>
+                            <field name="vaccine_id" required="1"/>
+                            <field name="vaccine_dose" required="1"/>
+                            <field name="dose_date" required="1" string="Date"/>
+                            <field name="vaccination_centre_id"/>
+                            <field name="vaccinated_country_id"/>
+                            <field name="employee_id" invisible="1"/>
+                        </tree>
+                        <form>
+                            <group name="vaccine_info" string="Chi tiết Vacine">
+                                <group>
+                                    <field name="vaccine_id" required="1"/>
+                                    <field name="dose_date" required="1"/>
+                                    <field name="vaccine_dose" required="1"/>
+                                    <field name="vaccination_centre_id"/>
+                                </group>
+                                <group>
+                                    <field name="vaccinated_country_id"/>
+                                    <field name="employee_id" invisible="1"/>
+                                </group>
+                            </group>
+                            <group name="vaccine_certificate_info" string="Xác nhận">
+                                <field name="vaccine_certificate_ids"  string="Thêm ảnh giấy hoặc mã QR xác nhận"
+                                       nolabel="1"
+                                       colspan="2"/>
+                            </group>
+                        </form>
+                    </field>
+                    <group name="note_group" col="6" class="mt-2 mt-md-0">
+                        <group colspan="4">
+                            <field name="vaccine_note" nolabel="1" placeholder="Thông tin khác"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

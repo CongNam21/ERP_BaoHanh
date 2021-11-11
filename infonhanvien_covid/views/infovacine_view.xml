@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="hr_employee_vaccine_tree_view" model="ir.ui.view">
+            <field name="name">hr.employee.vaccine.info.tree.view</field>
+            <field name="model">hr.employee.vaccine.info</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="dose"/>
+                    <field name="period"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_employee_vaccine_form_view">
+            <field name="name">hr.employee.vaccine.info.form.view</field>
+            <field name="model">hr.employee.vaccine.info</field>
+            <field name="arch" type="xml">
+                <form string="Vaccine Details">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Tên Vacine"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="dose" required="1"/>
+                                <label for="period"/>
+                                <div>
+                                    <field name="period" class="oe_inline" nolable="1"/>
+                                    <span class="ml8">Days</span>
+                                </div>
+
+                                <field name="country_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="info" string="Chi tiết">
+                                <field name="vaccine_details"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_hr_employee_vaccine_info" model="ir.actions.act_window">
+            <field name="name">Vaccine Details</field>
+            <field name="res_model">hr.employee.vaccine.info</field>
+            <field name="view_mode">tree,form,search</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a Vaccine
+                </p>
+            </field>
+        </record>
+
+<menuitem id="menu_hr_employee_vaccine_config"
+                  name="Thông tin tiêm chủng covid"
+                  action="action_hr_employee_vaccine_info"
+                  sequence="1"/>
+
+        <menuitem id="menu_hr_employee_vaccine_info"
+                  action="action_hr_employee_vaccine_info"
+                  parent="menu_hr_employee_vaccine_config"
+                  name="Vaccine"
+                  sequence="5"/>
+    </data>
+</odoo>
