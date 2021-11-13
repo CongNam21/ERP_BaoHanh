@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="hr_employee_form_view_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.form.view.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='mobile_phone']" position="attributes">
+                    <attribute name="string">Số điện thoại cá nhân</attribute>
+                </xpath>
+                <xpath expr="//field[@name='job_title']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <field name="mobile_phone" position="after">
+                    <field name="job"/>
+                </field>
+                <xpath expr="//field[@name='coach_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <field name="parent_id" position="after">
+                    <field name="x_date_start"/>
+                </field>
+                     <xpath expr="//field[@name='department_id']" position="attributes">
+                <attribute name="string">Bộ phận</attribute>
+            </xpath>
+                   <xpath expr="//field[@name='emergency_contact']" position="attributes">
+                <attribute name="string">Địa chỉ liên hệ</attribute>
+            </xpath>
+                 <xpath expr="//field[@name='study_field']" position="attributes">
+                <attribute name="string">Ngành học</attribute>
+            </xpath>
+                 <field name="identification_id" position="attributes">
+                   <attribute name="invisible">1</attribute>
+                </field>
+                <field name="private_email" position="attributes">
+                   <attribute name="invisible">1</attribute>
+                </field>
+                <field name="study_school" position="after">
+                    <field name="language"/>
+                </field>
+                <field name="language" position="after">
+                    <field name="english"/>
+                </field>
+                <field name="country_id" position="after">
+                    <field name="iden"/>
+                </field>
+                <field name="phone" position="after">
+                    <field name="email"/>
+                </field>
+                <field name="english" position="after">
+                    <field name="certifi"/>
+                </field>
+                  <xpath expr="//field[@name='tz']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='country_of_birth']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='private_email']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='km_home_work']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                  <xpath expr="//label[@for='km_home_work']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='phone']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='visa_no']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='permit_no']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='visa_expire']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                 <xpath expr="//page[@name='hr_settings']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//group[@name='work_permit']" position="attributes">
+                   <attribute name="string"></attribute>
+                 </xpath>
+                <xpath expr="//group[@name='managers']" position="attributes">
+                   <attribute name="string"></attribute>
+                 </xpath>
+                <xpath expr="//field[@name='children']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                  <xpath expr="//div[@name='button_box']" position="inside">
+                <field name="vaccination_status" invisible="1"/>
+
+                <button id="hr_presence_button" class="oe_stat_button" style="width: 153px;"
+                        groups="base.group_user">
+                    <div role="img" class="fa fa-heartbeat text-success o_button_icon"
+                         attrs="{'invisible': [('vaccination_status', '!=', 'full')]}" aria-label="Đã tiêm vacine"
+                         title="Đã tiêm đủ vacine"/>
+                    <div role="img" class="fa fa fa-heartbeat text-warning o_button_icon"
+                         attrs="{'invisible': [('vaccination_status', '!=', 'partial')]}"
+                         aria-label="Đã tiêm 1 mũi"
+                         title="Đã tiem 1 mũi"/>
+                    <div role="img" class="fa fa fa-heartbeat text-danger o_button_icon"
+                         attrs="{'invisible': [('vaccination_status', '!=', 'no')]}" aria-label="Chưa tiêm"
+                         title="Chưa tiêm"/>
+
+                    <div class="o_stat_info">
+                        <span class="o_stat_value" attrs="{'invisible': [('vaccination_status', '!=', 'full')]}">
+                            <b>Đã tiêm đủ</b>
+                        </span>
+                        <span class="o_stat_value" attrs="{'invisible': [('vaccination_status', '!=', 'partial')]}">
+                            <b>Đã tiêm</b>
+                        </span>
+                        <span class="o_stat_value" attrs="{'invisible': [('vaccination_status', '!=', 'no')]}">
+                            <b>Chưa tiêm</b>
+                        </span>
+                        <span class="o_stat_value">
+                            Số mũi :
+                            <field name="vaccine_dose_count"/>
+                        </span>
+                    </div>
+                </button>
+
+            </xpath>
+
+            <xpath expr="//page[@name='hr_settings']" position="after">
+                <page name="vaccination_details" string="Thông tin tiêm chủng" groups="hr.group_hr_manager">
+                    <field name="employee_vaccination_ids" mode="tree,kanban">
+                        <tree string="Vaccination Details">
+                            <control>
+                                <create name="add_product_control" string="Thêm thông tin Vacine"/>
+                            </control>
+                            <field name="sequence" widget="handle"/>
+                            <field name="vaccine_id" required="1"/>
+                            <field name="vaccine_dose" required="1"/>
+                            <field name="dose_date" required="1"/>
+                            <field name="vaccination_centre_id"/>
+                            <field name="vaccinated_country_id"/>
+                            <field name="employee_id" invisible="1"/>
+                        </tree>
+                        <form>
+                            <group name="vaccine_info" string="Chi tiết Vacine">
+                                <group>
+                                    <field name="vaccine_id" required="1"/>
+                                    <field name="dose_date" required="1"/>
+                                    <field name="vaccine_dose" required="1"/>
+                                    <field name="vaccination_centre_id"/>
+                                </group>
+                                <group>
+                                    <field name="vaccinated_country_id"/>
+                                    <field name="employee_id" invisible="1"/>
+                                </group>
+                            </group>
+                            <group name="vaccine_certificate_info" string="Xác nhận">
+                                <field name="vaccine_certificate_ids"  string="Thêm ảnh giấy hoặc mã QR xác nhận"
+                                       nolabel="1"
+                                       colspan="2"/>
+                            </group>
+                        </form>
+                    </field>
+                    <group name="note_group" col="6" class="mt-2 mt-md-0">
+                        <group colspan="4">
+                            <field name="vaccine_note" nolabel="1" placeholder="Thông tin khác"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+
+            </field>
+        </record>
+                <record id="action_hr_employee" model="ir.actions.act_window">
+            <field name="name">Nhân viên</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.employee</field>
+            <field name="view_mode">tree,form,kanban,activity</field>
+        </record>
+        <!--        tao menu -->
+        <menuitem id="phieubaohanh_root"
+                  name="Quản lý sửa chữa"
+                  sequence="1"/>
+        <menuitem id="menu_qlynv"
+                  parent="phieubaohanh_root"
+                  name="Nhân viên"
+                  sequence="10"/>
+
+        <menuitem id="nv_root"
+                  name="Thông tin nhân viên"
+                  parent="menu_qlynv"
+                  action="action_hr_employee"
+                  sequence="10"/>
+
+    </data>
+</odoo>
