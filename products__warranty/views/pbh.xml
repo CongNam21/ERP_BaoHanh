@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="phieubaohanh_view" model="ir.ui.view">
+            <field name="name">pbh.sp.view</field>
+            <field name="model">pbh.sp</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_sv">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                            <group>
+                                <group>
+                                    <field name="namecus"/>
+                                    <br>
+                                    </br>
+                                    <field name="phieusua"/>
+                                    <br>
+                                    </br>
+                                    <field name="sup"/>
+                                    <br>
+                                    </br>
+                                    <field name="loaisp"/>
+                                    <br>
+                                    </br>
+                                    <field name="active"/>
+                                    <br>
+                                    </br>
+                                </group>
+                                <group>
+                                    <field name="img" widget="image" class="oe_avatar"/>
+                                </group>
+
+                                <group>
+                                    <field name="date"/>
+                                    <br>
+                                    </br>
+                                    <field name="product"/>
+                                    <br>
+                                    </br>
+<!--                                    <field name="product_id" widget="many2many_tags"/>-->
+                                </group>
+
+                            </group>
+
+                            <notebook>
+                                <page string="Linh kiện bảo hành">
+                                    <field name="lkbh_lines">
+                                        <tree editable="bottom">
+                                            <field name="productlk_id"/>
+                                            <field name="productlk_qty"/>
+                                            <field name="exp"/>
+                                            <field name="ghichu"/>
+                                            <field name="lkbh_id" invisible="1"/>
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <group>
+                                                    <field name="productlk_id"/>
+                                                    <field name="productlk_qty"/>
+                                                    <field name="exp"/>
+                                                </group>
+                                                <group>
+                                                    <field name="ghichu"/>
+                                                </group>
+                                            </group>
+                                        </form>
+                                    </field>
+                                </page>
+
+                                <page name="information_note" string="Ghi chú">
+                                    <field name="gc"/>
+                                </page>
+                            </notebook>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="phieubaohanh_tree_view" model="ir.ui.view">
+            <field name="name">pbh.sp.view</field>
+            <field name="model">pbh.sp</field>
+            <field name="arch" type="xml">
+                <tree string="Phiếu bảo hành" default_order="create_date desc">
+                    <field name="name"/>
+                    <field name="namecus"/>
+                    <field name="product"/>
+                    <field name="date"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="phieubaohanh_action" model="ir.actions.act_window">
+            <field name="name">Danh sách phiếu bảo hành</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">pbh.sp</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Tạo phiếu bảo hành mới !
+                </p>
+
+            </field>
+        </record>
+
+        <menuitem id="phieubaohanh_root"
+                  name="Quản lý sửa chữa"
+                  sequence="1"/>
+        <menuitem id="menu_qly"
+                  parent="phieubaohanh_root"
+                  name="Quản Lý"
+                  sequence="10"/>
+
+        <menuitem id="phieubaohanh_sp_root"
+                  name="Bảo hành sau sửa chữa"
+                  parent="menu_qly"
+                  action="phieubaohanh_action"
+                  sequence="10"/>
+
+    </data>
+</odoo>
